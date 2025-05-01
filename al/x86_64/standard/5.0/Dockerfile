@@ -221,14 +221,6 @@ RUN set -ex \
     && chromium --version \
     && chromium-browser --version
 
-# Install Mozilla Firefox
-RUN set -ex \
-    && curl -L "https://download.mozilla.org/?product=firefox-latest&os=linux64" --output /tmp/FirefoxSetup.tar.bz2 \
-    && tar xjf /tmp/FirefoxSetup.tar.bz2 -C /opt/ \
-    && ln -s /opt/firefox/firefox /usr/local/bin/firefox \
-    && rm -rf /tmp/* \
-    && firefox --version
-
 # Install Geckodriver
 RUN set -ex \
     && GECKODRIVER_DOWNLOAD_URL=$(curl -sL https://api.github.com/repos/mozilla/geckodriver/releases/latest | jq -r ' .assets[] | select(.browser_download_url | endswith("linux64.tar.gz")) | .browser_download_url') \
